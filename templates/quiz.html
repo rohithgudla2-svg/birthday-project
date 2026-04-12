@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    text-align:center;
+    background:black;
+    color:white;
+    font-family:Arial;
+}
+
+/* fade animation */
+.fade{
+    animation: fade 0.5s;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:scale(0.9);}
+    to{opacity:1; transform:scale(1);}
+}
+
+/* buttons */
+button{
+    padding:12px 20px;
+    margin:10px;
+    border:none;
+    border-radius:20px;
+    background:linear-gradient(45deg,pink,purple);
+    color:white;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+/* result */
+#result{
+    font-size:20px;
+    margin-top:10px;
+    animation: pop 0.3s;
+}
+
+@keyframes pop{
+    from{transform:scale(0);}
+    to{transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<h2 class="fade">🎮 Friendship Quiz</h2>
+
+<div id="box" class="fade">
+    <p id="q"></p>
+    <button onclick="ans('a')" id="b1"></button><br>
+    <button onclick="ans('b')" id="b2"></button>
+    <p id="result"></p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+var questions = [
+    ["Favorite food?", "Pizza 🍕", "Biryani 🍛", "b"],
+    ["Best time?", "College", "School", "b"],
+    ["What I like?", "Sleep 😴", "Study 📚", "a"]
+];
+
+var i=0,s=0;
+
+function load(){
+    document.getElementById("box").classList.remove("fade");
+    void document.getElementById("box").offsetWidth;
+    document.getElementById("box").classList.add("fade");
+
+    q.innerHTML=questions[i][0];
+    b1.innerHTML=questions[i][1];
+    b2.innerHTML=questions[i][2];
+    result.innerHTML="";
+}
+load();
+
+function ans(x){
+    if(x==questions[i][3]){
+        s++;
+        result.innerHTML="✅ Correct 😄";
+        confetti({particleCount:100,spread:70});
+    } else {
+        result.innerHTML="❌ Wrong 😂";
+    }
+
+    i++;
+
+    setTimeout(()=>{
+        if(i<questions.length){
+            load();
+        } else {
+            document.body.innerHTML =
+            "<h1 class='fade'>🏆 Score: "+s+"/"+questions.length+"</h1><br><a href='/home'>Back</a>";
+        }
+    },800);
+}
+</script>
+
+</body>
+</html>

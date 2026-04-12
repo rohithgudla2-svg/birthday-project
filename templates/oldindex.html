@@ -1,0 +1,203 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 🎉</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    font-family:Arial;
+    color:white;
+    text-align:center;
+    overflow:hidden;
+    min-height:100vh;
+    position:relative;
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1f4068);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* floating bubbles */
+.bubble{
+    position:absolute;
+    bottom:-100px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.15);
+    animation:rise linear infinite;
+}
+@keyframes rise{
+    from{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120vh) scale(1.4);
+        opacity:0;
+    }
+}
+
+/* content */
+.container{
+    position:relative;
+    z-index:2;
+    margin-top:120px;
+    animation:slideUp 1.5s ease;
+}
+
+@keyframes slideUp{
+    from{
+        opacity:0;
+        transform:translateY(60px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h1{
+    font-size:50px;
+    letter-spacing:2px;
+    animation:shine 3s infinite alternate;
+}
+@keyframes shine{
+    from{text-shadow:0 0 10px #fff;}
+    to{text-shadow:0 0 25px #00eaff;}
+}
+
+p{
+    font-size:20px;
+    margin-top:15px;
+}
+
+/* buttons */
+.btn{
+    display:inline-block;
+    margin:12px;
+    padding:14px 28px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.2);
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    backdrop-filter: blur(8px);
+    transition:0.3s;
+    border:1px solid rgba(255,255,255,0.3);
+}
+.btn:hover{
+    transform:translateY(-5px) scale(1.05);
+    box-shadow:0 8px 20px rgba(255,255,255,0.2);
+}
+
+/* popup */
+#popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.92);
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:5;
+}
+
+#popup img{
+    width:220px;
+    border-radius:20px;
+    margin-bottom:20px;
+    animation:floatPic 3s ease-in-out infinite;
+}
+@keyframes floatPic{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+}
+
+#msg{
+    font-size:22px;
+    max-width:700px;
+    line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🎉 Happy Birthday 🎉</h1>
+    <p>I made something special for you ❤️</p>
+
+    <button class="btn" onclick="showSurprise()">🎁 Surprise</button>
+
+    <br><br>
+
+    <a href="/message" class="btn">💌 Message</a>
+    <a href="/gallery" class="btn">📸 Memories</a>
+    <a href="/quiz" class="btn">🎮 Quiz</a>
+    <a href="/secret" class="btn">🔒 Secret</a>
+</div>
+
+<!-- popup -->
+<div id="popup">
+    <img src="{{ url_for('static', filename='1000216215.jpg') }}">
+    <h1>🎂 Happy Birthday ❤️</h1>
+    <p id="msg"></p>
+</div>
+
+<audio id="voice">
+    <source src="{{ url_for('static', filename='music/voice.mp3') }}">
+</audio>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+// floating bubbles
+for(let i=0;i<25;i++){
+    let b=document.createElement("div");
+    b.className="bubble";
+    let s=Math.random()*50+20;
+    b.style.width=s+"px";
+    b.style.height=s+"px";
+    b.style.left=Math.random()*100+"vw";
+    b.style.animationDuration=(Math.random()*8+6)+"s";
+    document.body.appendChild(b);
+}
+
+// popup
+function showSurprise(){
+    document.getElementById("popup").style.display="flex";
+
+    confetti({
+        particleCount:250,
+        spread:140
+    });
+
+    document.getElementById("voice").play();
+
+    let text="You are one of the most special people in my life ❤️ Thank you for all the smiles, memories, and support 😊";
+    let i=0;
+    document.getElementById("msg").innerHTML="";
+
+    function type(){
+        if(i<text.length){
+            document.getElementById("msg").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type,40);
+        }
+    }
+    type();
+}
+</script>
+
+</body>
+</html>

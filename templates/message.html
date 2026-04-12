@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+    margin:0;
+    background:black;
+    color:white;
+    text-align:center;
+    font-family:Arial;
+    overflow:hidden;
+}
+
+.container{
+    margin-top:120px;
+    animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+#text{
+    font-size:28px;
+    color:pink;
+    text-shadow:0 0 10px pink;
+}
+
+/* floating hearts */
+.heart{
+    position:absolute;
+    color:red;
+    animation: float 5s linear infinite;
+}
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>💌 Special Message</h1>
+    <h2 id="text"></h2>
+    <br><br>
+    <a href="/home" style="color:white;">Back</a>
+</div>
+
+<script>
+let msg = "Happy Birthday 🎉 Thank you for being such an amazing friend ❤️";
+let i = 0;
+
+function type(){
+    if(i < msg.length){
+        document.getElementById("text").innerHTML += msg.charAt(i);
+        i++;
+        setTimeout(type, 50);
+    }
+}
+type();
+
+function createHeart(){
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+}
+setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
