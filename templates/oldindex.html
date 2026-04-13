@@ -134,7 +134,7 @@ p{
 <body>
 
 <div class="container">
-    <h1>🎉 Happy Birthday 🎉</h1>
+    <h1>🎉 Happy Birthday Ruchi🎉</h1>
     <p>I made something special for you ❤️</p>
 
     <button class="btn" onclick="showSurprise()">🎁 Surprise</button>
@@ -149,13 +149,13 @@ p{
 
 <!-- popup -->
 <div id="popup">
-    <img src="{{ url_for('static', filename='1000216215.jpg') }}">
-    <h1>🎂 Happy Birthday ❤️</h1>
+    <img src="{{ url_for('static', filename='eyes.jpg') }}">
+    <h1>🎂 Happy Birthday Ruchi ❤️</h1>
     <p id="msg"></p>
 </div>
 
 <audio id="voice">
-    <source src="{{ url_for('static', filename='music/voice.mp3') }}">
+    <source src="{{ url_for('static', filename='birthday.mp3') }}">
 </audio>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -184,7 +184,7 @@ function showSurprise(){
 
     document.getElementById("voice").play();
 
-    let text="You are one of the most special people in my life ❤️ Thank you for all the smiles, memories, and support 😊";
+    let text="You are eyes and smile is very very beautiful ❤️ Thank you for all the smiles, memories, and support for me😊";
     let i=0;
     document.getElementById("msg").innerHTML="";
 

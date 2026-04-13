@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-USERNAME = "rohith"
-PASSWORD = "1234"
+USERNAME = "Ruchi"
+PASSWORD = "Ruchi1432"
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
